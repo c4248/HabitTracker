@@ -67,31 +67,74 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 38:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(39);
-
-
-/***/ }),
-
-/***/ 39:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(40)
-
-
-/***/ }),
-
-/***/ 40:
+/***/ 0:
 /***/ (function(module, exports) {
 
-module.exports = require("next/error");
+module.exports = require("moment");
+
+/***/ }),
+
+/***/ 36:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(8);
+
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
+var habitList = [];
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : habitList;
+    var action = arguments[1];
+
+    switch (action.type) {
+        case 'CREATE_HABIT':
+            return [].concat(_toConsumableArray(state), [_extends({}, action.habit)]);
+
+        case 'REMOVE_HABIT':
+            return state.filter(function (habit) {
+                return action.key !== habit.key;
+            });
+
+        case 'SET_REDUCER_HABIT':
+            return state.map(function (habit) {
+                if (habit.key == action.key) {
+                    return _extends({}, habit, { date: __WEBPACK_IMPORTED_MODULE_0_moment___default()().valueOf() });
+                } else {
+                    return habit;
+                }
+            });
+
+        case 'SET_STATE':
+            var initialHabitList = [];
+            for (var habit in action.payload) {
+                initialHabitList.push(_extends({}, action.payload[habit], { key: habit }));
+            }
+            return initialHabitList;
+
+        default:
+            return state;
+    }
+});
 
 /***/ })
 

@@ -1,0 +1,1 @@
+module.exports=__NEXT_REGISTER_PAGE("/axios/axios",function(){var o=webpackJsonp([15],{380:function(o,e,a){o.exports=a(7)}},[380]);return{page:o.default}});

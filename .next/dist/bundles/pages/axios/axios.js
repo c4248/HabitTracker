@@ -67,31 +67,40 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 38:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(3);
 
 
 /***/ }),
 
-/***/ 39:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 3:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__(40)
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 
+
+var instance = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
+    baseURL: 'https://planner-7d357.firebaseio.com/'
+});
+
+/* harmony default export */ __webpack_exports__["default"] = (instance);
 
 /***/ }),
 
-/***/ 40:
+/***/ 4:
 /***/ (function(module, exports) {
 
-module.exports = require("next/error");
+module.exports = require("axios");
 
 /***/ })
 

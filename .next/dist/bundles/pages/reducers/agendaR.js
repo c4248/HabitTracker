@@ -67,31 +67,52 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 38:
+/***/ 35:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(7);
 
 
 /***/ }),
 
-/***/ 39:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 7:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__(40)
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-/***/ }),
+var taskList = [];
 
-/***/ 40:
-/***/ (function(module, exports) {
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : taskList;
+    var action = arguments[1];
 
-module.exports = require("next/error");
+    switch (action.type) {
+        case 'ADD_TASK':
+            return [].concat(_toConsumableArray(state), [action.task]);
+        case 'REMOVE_TASK':
+            return state.filter(function (task) {
+                return action.taskName !== task.task;
+            });
+        case 'SET_REDUCER_STATE':
+            var initialList = [];
+            for (var task in action.tasks) {
+                var taskWithKey = _extends({}, action.tasks[task], { key: task });
+                initialList.push(taskWithKey);
+            }
+            return initialList;
+        default:
+            return state;
+    }
+});
 
 /***/ })
 
