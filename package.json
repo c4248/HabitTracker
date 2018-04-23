@@ -14,11 +14,7 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "next": "next",
-    "build": "next build",
+    "start": "next start -p $PORT",
     "heroku-postbuild": "next build"
   }
 }
