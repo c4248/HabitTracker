@@ -21442,6 +21442,8 @@ function symbolObservablePonyfill(root) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios_axios__ = __webpack_require__("./pages/axios/axios.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 (function () {
     var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
@@ -21458,8 +21460,10 @@ function symbolObservablePonyfill(root) {
 
 var createHabit = function createHabit(habit) {
     return function (dispatch) {
-        __WEBPACK_IMPORTED_MODULE_1__axios_axios__["a" /* default */].post('/habits.json', habit).then(function (response) {
-            return dispatch(addHabit(response.data));
+        __WEBPACK_IMPORTED_MODULE_1__axios_axios__["a" /* default */].post('/habits.json', habit).then(function (_ref) {
+            var data = _ref.data;
+
+            dispatch(addHabit(_extends({}, habit, { key: data.name })));
         });
     };
 };
@@ -21474,7 +21478,8 @@ var addHabit = function addHabit(habit) {
 var delHabit = function delHabit(key) {
     return function (dispatch) {
         __WEBPACK_IMPORTED_MODULE_1__axios_axios__["a" /* default */].delete('/habits/' + key + '.json').then(function () {
-            return dispatch(removeHabit(key));
+            console.log(key);
+            dispatch(removeHabit(key));
         });
     };
 };
@@ -21666,9 +21671,9 @@ var AddTracker = function (_React$Component) {
             _this.setState({ title: e.target.value });
         }, _this.onSubmit = function (e) {
             e.preventDefault();
-            console.log(_this.state);
             _this.setState({ date: __WEBPACK_IMPORTED_MODULE_3_moment___default()().valueOf() }, function () {
-                return _this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions_habitA__["a" /* createHabit */])(_this.state));
+                _this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions_habitA__["a" /* createHabit */])(_this.state));
+                _this.setState({ title: '' });
             });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -21680,19 +21685,19 @@ var AddTracker = function (_React$Component) {
                 'form',
                 { onSubmit: this.onSubmit, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 26
+                        lineNumber: 28
                     }
                 },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.title, onChange: this.onChange, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 27
+                        lineNumber: 29
                     }
                 }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'button',
                     { type: 'submit', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 28
+                            lineNumber: 30
                         }
                     },
                     'Submit'
@@ -22342,7 +22347,7 @@ var _default = function _default() {
 
     switch (action.type) {
         case 'CREATE_HABIT':
-            return [].concat(_toConsumableArray(state), [{ title: action.habit.title, date: action.date }]);
+            return [].concat(_toConsumableArray(state), [_extends({}, action.habit)]);
 
         case 'REMOVE_HABIT':
             return state.filter(function (habit) {

@@ -14,11 +14,13 @@ class AddTracker extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
         this.setState(
             {date: moment().valueOf()},
-            ()=>this.props.dispatch(createHabit(this.state))
-        )   
+            ()=>{
+                this.props.dispatch(createHabit(this.state))
+                this.setState({title: ''})
+            }
+        )  
     }
 
     render(){

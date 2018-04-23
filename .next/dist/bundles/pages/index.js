@@ -143,6 +143,8 @@ var updateTask = function updateTask(task) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("moment");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios_axios__ = __webpack_require__("./pages/axios/axios.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 
 
 // export const createHabit = ({title, date}) => ({
@@ -153,8 +155,10 @@ var updateTask = function updateTask(task) {
 
 var createHabit = function createHabit(habit) {
     return function (dispatch) {
-        __WEBPACK_IMPORTED_MODULE_1__axios_axios__["a" /* default */].post('/habits.json', habit).then(function (response) {
-            return dispatch(addHabit(response.data));
+        __WEBPACK_IMPORTED_MODULE_1__axios_axios__["a" /* default */].post('/habits.json', habit).then(function (_ref) {
+            var data = _ref.data;
+
+            dispatch(addHabit(_extends({}, habit, { key: data.name })));
         });
     };
 };
@@ -169,7 +173,8 @@ var addHabit = function addHabit(habit) {
 var delHabit = function delHabit(key) {
     return function (dispatch) {
         __WEBPACK_IMPORTED_MODULE_1__axios_axios__["a" /* default */].delete('/habits/' + key + '.json').then(function () {
-            return dispatch(removeHabit(key));
+            console.log(key);
+            dispatch(removeHabit(key));
         });
     };
 };
@@ -942,7 +947,7 @@ var habitList = [];
 
     switch (action.type) {
         case 'CREATE_HABIT':
-            return [].concat(_toConsumableArray(state), [{ title: action.habit.title, date: action.date }]);
+            return [].concat(_toConsumableArray(state), [_extends({}, action.habit)]);
 
         case 'REMOVE_HABIT':
             return state.filter(function (habit) {

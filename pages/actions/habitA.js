@@ -9,7 +9,9 @@ import axios from '../axios/axios'
 export const createHabit = (habit) => {
     return dispatch => {
         axios.post('/habits.json', habit)
-            .then(response=>dispatch(addHabit(response.data)))
+            .then(({data})=>{
+                dispatch(addHabit({...habit, key:data.name}))
+            })
     }
 }
 
@@ -21,7 +23,10 @@ export const addHabit = (habit) => ({
 export const delHabit = (key) => {
     return dispatch => {
         axios.delete(`/habits/${key}.json`)
-            .then(()=>dispatch(removeHabit(key)))
+            .then(()=>{
+                console.log(key)
+                dispatch(removeHabit(key)
+            )})
     }
 }
 

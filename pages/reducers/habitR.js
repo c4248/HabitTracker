@@ -5,7 +5,7 @@ const habitList = []
 export default (state=habitList, action) => {
     switch(action.type){
         case 'CREATE_HABIT':
-            return [...state, {title: action.habit.title, date: action.date}]
+            return [...state, {...action.habit}]
 
         case 'REMOVE_HABIT':
             return state.filter(habit=>action.key !== habit.key)
